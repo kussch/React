@@ -1,2 +1,2 @@
 # React
-practice
+self practice
