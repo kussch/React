@@ -1,2 +1,2 @@
 # React
-self practice
+self practice with freeCodeCamp. 
