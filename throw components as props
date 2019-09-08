@@ -1,0 +1,55 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+export const Counter = ({ counter = 0}) => {
+	return <h1>(`Counter component value is: ${counter}`)</h1>
+}
+
+export const Button = () => {
+	return <button>Simple button</button>
+}
+
+export class Lesson extends Component {
+	static propTypes = {
+		children: PropTypes.element,
+	}
+
+	static defaultProps = {
+		children: null, 
+	}
+
+	state = {
+		counter: 0,
+	}
+
+	handleClick = () => {
+		this.setState(({ counter }) => ({
+			counter: ++counter,
+		}))
+	}
+
+	render() {
+		const { counter } = this.state;
+		const { children, child } = this.props; //get nested (children) component and props of child (button) via destructurization of props object
+
+		return (
+			<div>
+        {child}
+        <div>{counter}</div>
+        {React.cloneElement(children, {counter: this.state.counter})} //clone wrapped (children) component with the props we want to pass
+        <button onClick={this.handleClick}>+1</button>
+			</div>
+		);
+	}
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Lesson, Counter, Button } from './components/lesson.jsx';
+
+React.createElement('div', null, 'Simple div with text');
+React.createElement('input', { className: 'just-input' });
+
+ReactDOM.render(<Lesson child={<Button />}><Counter /></Lesson>, document.getElementById('root'));
